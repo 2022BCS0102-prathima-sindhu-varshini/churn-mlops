@@ -17,6 +17,7 @@ class Customer(BaseModel):
     monthly_charges: float
     contract_type: str
     tickets: List[Ticket]
+    print("FEATURES:", features)
 
 @app.post("/predict-risk")
 def predict_risk(customer: Customer):
