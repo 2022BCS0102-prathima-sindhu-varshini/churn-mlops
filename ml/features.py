@@ -8,6 +8,8 @@ def extract_features(customer):
     complaints = 0
     queries = 0
     dates = []
+    sentiment = complaints - queries
+charge_change = customer["monthly_charges"] * 0.1
 
     for t in tickets:
         d = datetime.strptime(t["date"], "%Y-%m-%d")
@@ -31,11 +33,13 @@ def extract_features(customer):
         time_gap = 0
 
     return {
-        "tickets_7": t7,
-        "tickets_30": t30,
-        "tickets_90": t90,
-        "complaints": complaints,
-        "queries": queries,
-        "monthly_charges": customer["monthly_charges"],
-        "time_gap": time_gap
-    }
+    "tickets_7": t7,
+    "tickets_30": t30,
+    "tickets_90": t90,
+    "complaints": complaints,
+    "queries": queries,
+    "monthly_charges": customer["monthly_charges"],
+    "time_gap": time_gap,
+    "sentiment": sentiment,
+    "charge_change": charge_change
+}
