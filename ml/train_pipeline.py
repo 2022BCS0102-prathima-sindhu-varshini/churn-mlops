@@ -4,7 +4,7 @@ import pickle
 from sklearn.ensemble import RandomForestClassifier
 from sklearn.model_selection import train_test_split
 from sklearn.metrics import f1_score, roc_auc_score, precision_score
-
+from sklearn.metrics import precision_recall_curve
 data = []
 
 for _ in range(300):
@@ -31,6 +31,8 @@ y_pred = model.predict(X_test)
 print("F1:", f1_score(y_test, y_pred))
 print("Precision:", precision_score(y_test, y_pred))
 print("ROC-AUC:", roc_auc_score(y_test, y_pred))
+precision_vals, recall_vals, _ = precision_recall_curve(y_test, y_pred)
+print("Precision-Recall computed")
 
 pickle.dump(model, open("model.pkl", "wb"))
 
