@@ -1,27 +1,14 @@
-from fastapi import FastAPI
-from pydantic import BaseModel
-from typing import List
+from ml.features import extract_features
 from app.model import predict_ml
-import logging
-
-app = FastAPI()
-
-logging.basicConfig(level=logging.INFO)
-
-class Ticket(BaseModel):
-    type: str
-    date: str
-
-class Customer(BaseModel):
-    customer_id: str
-    monthly_charges: float
-    contract_type: str
-    tickets: List[Ticket]
-    print("FEATURES:", features)
 
 @app.post("/predict-risk")
 def predict_risk(customer: Customer):
-    logging.info(f"Request for {customer.customer_id}")
-    tickets_30 = len(customer.tickets)
-    risk = predict_ml(tickets_30, customer.monthly_charges)
+    customer_dict = customer.dict()
+
+    features = extract_features(customer_dict)
+
+    print("FEATURES:", features)   # debug
+
+    risk = predict_ml(features)
+
     return {"risk": risk}
