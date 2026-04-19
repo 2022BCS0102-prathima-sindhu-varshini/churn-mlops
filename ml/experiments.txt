@@ -1,0 +1,6 @@
+Model: RandomForest
+F1: 0.85
+Precision: 0.82
+ROC-AUC: 0.88
+Dataset: v1
+Features: tickets_30, charges, complaints
